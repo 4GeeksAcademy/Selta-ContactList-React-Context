@@ -1,45 +1,39 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	
+
 	return {
-		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+		
+			store: {
+			contacts: []
 		},
+		
+		
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getAgenda: async () => {
+				const response = await fetch ("https://playground.4geeks.com/apis/fake/contact/agenda/selta-agenda");
+				const jsonContact = await response.json ();
+				setStore({contacts: jsonContact});
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
+			addContact: (contacts) => {
 				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+				fetch ("https://playground.4geeks.com/apis/fake/contact/agenda"), {
+					method: "POST",
+					body: JSON.stringify ({
+						full_name: contacts.full_name,
+						email: contacts.email,
+						agenda_slug: contacts.agenda_slug,
+						address: contacts.address,
+						phone: contacts.phone 
+					})
+				};
+				const actions = getActions ();
+				actions.getAgenda (); 
 			}
-		}
+			},
+			
+			//deleteContact:
+		};
 	};
-};
+
 
 export default getState;
