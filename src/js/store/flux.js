@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 		
 		actions: {
+			
 			getAgenda: async () => {
 				const response = await fetch ("https://playground.4geeks.com/apis/fake/contact/agenda/selta-agenda");
 				const jsonContact = await response.json ();
@@ -22,13 +23,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"address": contacts.address,
 					"phone": contacts.phone
 				};
-				const store = getStore();
 				
-				await fetch ("https://playground.4geeks.com/apis/fake/contact"), {
+				const store = getStore();
+				await fetch ("https://playground.4geeks.com/apis/fake/contact", {
 					method: "POST",
 					headers: {"Content-Type": "application/json"},
 					body: JSON.stringify (newContact),
-				};
+				});
+				if (!response.ok) {
+					console.error("Failed to add contact",response.statusText);
+					return;
+				}
 				const actions = getActions ();
 				actions.getAgenda (); 
 				setStore ({contacts:[...store.contacts, newContact] });

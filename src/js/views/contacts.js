@@ -9,11 +9,6 @@ export const Contacts = () => {
 	const { store, actions } = useContext(Context);
 	useEffect(() => {actions.getAgenda()},  []);
 	
-	const handleAddContact = () => {
-		actions.addContact ( {
-			
-		})
-	}
 
 	return (
 		<div className="container">
@@ -28,7 +23,7 @@ export const Contacts = () => {
 							
 							<div className="d-flex align-items-center">
 								<div className="mx-3"> <img className="card-img-left" src="https://placehold.co/50x50" alt="Card image cap"></img> </div>
-								<div clasName="flex-column">
+								<div className="flex-column">
 									<strong > {item.full_name} </strong>		
 									<p className="text-primary" > {item.address} </p>
 									<p className="text-primary" > {item.phone} </p>

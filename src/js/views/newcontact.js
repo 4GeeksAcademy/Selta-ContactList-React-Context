@@ -29,22 +29,22 @@ export const NewContact = props => {
        <form onSubmit={handleSubmit}>
             <div className="form-group col-4">
                 <label for="inputName">Full Name</label>
-                <input type="text" className="form-control" id="inputName" placeholder="Enter full name"></input>
+                <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Enter full name"></input>
             </div>
             <div className="form-group col-4">
                 <label for="inputAddress">Address</label>
-                <input type="text" className="form-control" id="inputAddress" placeholder="Enter Address"></input>
+                <input type="text" className="form-control" id="inputAddress" name="inputAddress" placeholder="Enter Address"></input>
             </div>
             <div className="form-group col-4">
                 <label for="inputPhone">Phone</label>
-                <input type="number" className="form-control" id="inputPhone" placeholder="Enter phone number"></input>
+                <input type="tel" className="form-control" id="inputPhone" name="inputPhone" placeholder="Enter phone number"></input>
             </div>
             <div className="form-group col-4">
                 <label for="inputEmail">Email</label>
-                <input type="email" className="form-control" id="inputEmail" placeholder="Enter email"></input>
+                <input type="email" className="form-control" id="inputEmail" name="inputEmail" placeholder="Enter email"></input>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
-            {params.theid && store.contact[params.theid]?.form}
+           
 
        </form>
     
