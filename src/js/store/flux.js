@@ -18,22 +18,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const newContact = {
 					"full_name": contacts.full_name,
 					"email": contacts.email,
-					"agenda_slug": contacts.agenda_slug,
+					"agenda_slug": "selta-agenda",
 					"address": contacts.address,
 					"phone": contacts.phone
 				};
 				const store = getStore();
 				
-				await fetch ("https://playground.4geeks.com/apis/fake/contact/agenda"), {
+				await fetch ("https://playground.4geeks.com/apis/fake/contact"), {
 					method: "POST",
 					headers: {"Content-Type": "application/json"},
-					body: JSON.stringify ({
-						full_name: contacts.full_name,
-						email: contacts.email,
-						agenda_slug: contacts.agenda_slug,
-						address: contacts.address,
-						phone: contacts.phone 
-					})
+					body: JSON.stringify (newContact),
 				};
 				const actions = getActions ();
 				actions.getAgenda (); 
