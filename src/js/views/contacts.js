@@ -9,12 +9,18 @@ export const Contacts = () => {
 	const { store, actions } = useContext(Context);
 	useEffect(() => {actions.getAgenda()},  []);
 	
+	const handleAddContact = () => {
+		actions.addContact ( {
+			
+		})
+	}
 
 	return (
 		<div className="container">
 			<div className="card" >
 				<ul className="list-group">
-				{store.contacts.map((item, index) => {
+				{	store.contacts.length === 0 ? (<span>No contacts so far</span>) :
+					store.contacts.map((item, index) => {
 					return (
 						
 						<li key={index}
@@ -25,15 +31,21 @@ export const Contacts = () => {
 								<div clasName="flex-column">
 									<strong > {item.full_name} </strong>		
 									<p className="text-primary" > {item.address} </p>
+									<p className="text-primary" > {item.phone} </p>
+									<p className="text-primary" > {item.email} </p>
+
 								</div>
 							</div>				
 						</li>
 					);
 				})}
-			</ul></div>
+				</ul></div>
 			<br />
 			<Link to="/">
 				<button className="btn btn-primary">Back home</button>
+			</Link>
+			<Link to="/newcontact">
+				<button type="button" className="btn btn-success ms-3">Create New Contact</button>
 			</Link>
 		</div>
 	);
