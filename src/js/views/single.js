@@ -8,6 +8,35 @@ export const Single = props => {
 	const params = useParams();
 
 	const currentContact = store.contacts.find (contact => contact.id.toString() === params.contactId )
+
+   const [fullName, setFullName]  = useState('');
+   const [address, setAddress]  = useState('');
+   const [phone, setPhone]  = useState('');
+   const [email, setEmail]  = useState('');
+
+   useEffect (() => {  
+        if  (currentContact ) {
+            setFullName(currentContact.full_name),
+            setAddress (currentContact.address),
+            setPhone (currentContact.phone),
+            setEmail (currentContact.email)    
+        } 
+    }, [currentContact]  );
+
+    const handleChangeFullName = (e) => {
+        setFullName (e.target.value) 
+    };
+    const handleChangeAddress = (e) => {
+        setAddress (e.target.value) 
+    };
+    const handleChangePhone  = (e) => {
+        setPhone (e.target.value) 
+    };
+    const handleChangeEmail  = (e) => {
+        setEmail (e.target.value) 
+    };
+
+
 //do i need to create a editContact on flux? with update method?
 	const handleEdit = (e) => {
 		e.preventDefault ();
@@ -18,7 +47,7 @@ export const Single = props => {
             email: e.target.elements.inputEmail.value
         };
         
-        actions.editContact (params.contactID, editData);
+        actions.editContact (params.contactId, editData);
        
     };
 
@@ -28,20 +57,20 @@ export const Single = props => {
 		<div className="jumbotron">
 			<form onSubmit={handleEdit} className="form ms-3">
             <div className="form-group col-4">
-                <label for="inputName">Full Name</label>
-                <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Edit your name"></input>
+                <label htmlFor="inputName">Full Name</label>
+                <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Edit your name" onChange={handleChangeFullName} value={fullName} ></input>
             </div>
             <div className="form-group col-4">
-                <label for="inputAddress">Address</label>
-                <input type="text" className="form-control" id="inputAddress" name="inputAddress" placeholder="Edit your Address"></input>
+                <label htmlFor="inputAddress">Address</label>
+                <input type="text" className="form-control" id="inputAddress" name="inputAddress" placeholder="Edit your Address"  onChange={handleChangeAddress} value={address} ></input>
             </div>
             <div className="form-group col-4">
-                <label for="inputPhone">Phone</label>
-                <input type="tel" className="form-control" id="inputPhone" name="inputPhone" placeholder="Edit your phone number"></input>
+                <label htmlFor="inputPhone">Phone</label>
+                <input type="tel" className="form-control" id="inputPhone" name="inputPhone" placeholder="Edit your phone number"  onChange={handleChangePhone} value={phone} ></input>
             </div>
             <div className="form-group col-4">
-                <label for="inputEmail">Email</label>
-                <input type="email" className="form-control" id="inputEmail" name="inputEmail" placeholder="Edit your email"></input>
+                <label htmlFor="inputEmail">Email</label>
+                <input type="email" className="form-control" id="inputEmail" name="inputEmail" placeholder="Edit your email"  onChange={handleChangeEmail} value={email} ></input>
             </div>
             <button type="submit" className="btn btn-success mt-3">Submit</button>
            

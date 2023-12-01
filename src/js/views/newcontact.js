@@ -7,7 +7,7 @@ import { Context } from "../store/appContext";
 export const NewContact = props => {
 	
     const { store, actions } = useContext(Context);
-	const params = useParams ();
+	
     
     const handleSubmit = (e) => {
         e.preventDefault ();
@@ -31,7 +31,7 @@ export const NewContact = props => {
        <form onSubmit={handleSubmit} className="form ms-3">
             <div className="form-group col-4">
                 <label for="inputName">Full Name</label>
-                <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Enter full name"></input>
+                <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Enter full name"  ></input>
             </div>
             <div className="form-group col-4">
                 <label for="inputAddress">Address</label>
