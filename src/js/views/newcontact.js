@@ -18,15 +18,17 @@ export const NewContact = props => {
             phone: e.target.elements.inputPhone.value,
             email: e.target.elements.inputEmail.value
         };
-        actions.addContact (createData)
-    }
+        
+        actions.addContact (createData);
+       
+    };
 
 
     
    return (
     
     
-       <form onSubmit={handleSubmit}>
+       <form onSubmit={handleSubmit} className="form ms-3">
             <div className="form-group col-4">
                 <label for="inputName">Full Name</label>
                 <input type="text" className="form-control" id="inputName" name="inputName" placeholder="Enter full name"></input>
@@ -43,7 +45,7 @@ export const NewContact = props => {
                 <label for="inputEmail">Email</label>
                 <input type="email" className="form-control" id="inputEmail" name="inputEmail" placeholder="Enter email"></input>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-success mt-3">Submit</button>
            
 
        </form>

@@ -15,6 +15,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const jsonContact = await response.json ();
 				setStore({contacts: jsonContact});
 			},
+
+			deleteContact: async (id) => {
+				const actions = getActions();
+				
+				try {
+					const response = await fetch (`https://playground.4geeks.com/apis/fake/contact/${id}`,{
+					method: "DELETE"
+				});
+
+				console.log(response);
+
+				if (response.ok) {
+					alert ("Bye bye contact!");
+				} else {
+					console.error ("Failed to delete contact:", response.statusText);
+					return;
+				}
+				await actions.getAgenda();
+				} catch (error) {
+				console.error ("Error deleting contact:", error.message );
+				alert ("Failed to delete contact. Please try again");
+			}
+			},
+			
+
 			addContact: async (contacts) => {
 				const newContact = {
 					"full_name": contacts.full_name,
@@ -25,24 +50,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				
 				const store = getStore();
-				await fetch ("https://playground.4geeks.com/apis/fake/contact", {
+				
+				try { const response = await fetch ("https://playground.4geeks.com/apis/fake/contact", {
 					method: "POST",
 					headers: {"Content-Type": "application/json"},
 					body: JSON.stringify (newContact),
 				});
-				if (!response.ok) {
+
+				if (response.ok) {
+					alert ("Contact added successfully!");
+				} else {
 					console.error("Failed to add contact",response.statusText);
 					return;
 				}
+
 				const actions = getActions ();
 				actions.getAgenda (); 
 				setStore ({contacts:[...store.contacts, newContact] });
+			} catch (error) {
+				console.error ("Error adding contact:", error.message);
+				alert ("Failed to add contact. Please try again")
 			}
 			},
-			
+		
 			//deleteContact:
-		};
+		},
 	};
+};
 
 
 export default getState;
