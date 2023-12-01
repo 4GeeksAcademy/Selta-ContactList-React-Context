@@ -39,6 +39,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}
 			},
 			
+			editContact: async (id, contacts) => {
+				const actions = getActions ();
+				const editContact = {
+					"full_name": contacts.full_name,
+					"email": contacts.email,
+					"agenda_slug": "selta-agenda",
+					"address": contacts.address,
+					"phone": contacts.phone
+				};
+				
+				try {
+					const response = await fetch (`https://playground.4geeks.com/apis/fake/contact/${id}`,{
+						method: "PUT",
+						headers: {"Content-Type": "application/json"},
+						body: JSON.stringify (editContact),
+					});
+					if (response.ok) {
+						alert ("Uau how dare u edit this!");
+					} else {
+						console.error ("Failed to edit contact:", response.statusText);
+						return;
+					}
+					await actions.getAgenda();
+					
+				} catch (error) {
+					console.error ("Error editing contact:", error.message);
+					alert ("Try again loser")
+				}
+			},
 
 			addContact: async (contacts) => {
 				const newContact = {

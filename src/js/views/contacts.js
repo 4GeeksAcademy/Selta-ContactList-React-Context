@@ -9,7 +9,10 @@ export const Contacts = () => {
 	const { store, actions } = useContext(Context);
 	useEffect(() => {actions.getAgenda()},  []);
 	
-	const handleDeleteContact = (id) => actions.deleteContact (id);
+	const handleDeleteContact = (id) => {
+		if (window.confirm ("Are you sure you want to delete this contact?"))
+		{actions.deleteContact (id);}
+	};
 
 	return (
 		<div className="container">
