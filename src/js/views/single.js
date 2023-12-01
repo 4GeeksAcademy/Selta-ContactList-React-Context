@@ -7,11 +7,11 @@ export const Single = props => {
 	const { store, actions } = useContext(Context);
 	const params = useParams();
 
-	const currentContact = store.contacts.find (contact => contact.id.toString() === params.contactId );
+	const currentContact = store.contacts.find (contact => contact.id.toString() === params.contactId )
 
 	return (
 		<div className="jumbotron">
-			
+			{currentContact && (<p> {currentContact.full_name} </p>)}
 
 			<hr className="my-4" />
 
